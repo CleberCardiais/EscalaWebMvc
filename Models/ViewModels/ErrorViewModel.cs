@@ -1,4 +1,4 @@
-namespace EscalaWebMvc.Models
+namespace EscalaWebMvc.Models.ViewModels
 {
     public class ErrorViewModel
     {
