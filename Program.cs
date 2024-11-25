@@ -1,9 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using EscalaWebMvc.Data;
+
+//Configure services - mecanismo de injeção de dependência do app
+
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<EscalaWebMvcContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("EscalaWebMvcContext") ?? throw new InvalidOperationException("Connection string 'EscalaWebMvcContext' not found.")));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("EscalaWebMvcContext"), builder => 
+    builder.MigrationsAssembly("EscalaWebMvc")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
