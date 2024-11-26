@@ -22,6 +22,34 @@ namespace EscalaWebMvc.Migrations
                 {
                     table.PrimaryKey("PK_Func", x => x.Id);
                 });
+
+            migrationBuilder.CreateTable(
+    name: "Area",
+    columns: table => new
+    {
+        Id = table.Column<int>(nullable: false)
+            .Annotation("SqlServer:Identity", "1, 1"),
+        Zona = table.Column<string>(nullable: false)
+    },
+    constraints: table =>
+    {
+        table.PrimaryKey("PK_Area", x => x.Id);
+    });
+
+            migrationBuilder.AddColumn<int>(
+                name: "SetorId",
+                table: "Func",
+                nullable: false,
+                defaultValue: 0);
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_Func_Area_SetorId",
+                table: "Func",
+                column: "SetorId",
+                principalTable: "Area",
+                principalColumn: "Id",
+                onDelete: ReferentialAction.Cascade);
+
         }
 
         /// <inheritdoc />

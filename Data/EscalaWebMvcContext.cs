@@ -14,6 +14,19 @@ namespace EscalaWebMvc.Data
         {
         }
 
-        public DbSet<EscalaWebMvc.Models.Func> Func { get; set; } = default!;
+        public DbSet<EscalaWebMvc.Models.Func> Func { get; set; } 
+        public DbSet<EscalaWebMvc.Models.Area> Area { get; set; }
+        public DbSet<EscalaWebMvc.Models.Escala> Escala { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Area>().HasData(
+                new Area { Id = 1, Zona = "Musculação" },
+                new Area { Id = 2, Zona = "Recepção" },
+                new Area { Id = 3, Zona = "Limpeza" }
+            );
+        }
+
+
     }
 }

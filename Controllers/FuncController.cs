@@ -46,6 +46,7 @@ namespace EscalaWebMvc.Controllers
         // GET: Func/Create
         public IActionResult Create()
         {
+            ViewBag.Areas = new SelectList(_context.Area, "Id", "Zona");
             return View();
         }
 
@@ -54,7 +55,7 @@ namespace EscalaWebMvc.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name")] Func func)
+        public async Task<IActionResult> Create([Bind("Id,Name,SetorId")] Func func)
         {
             if (ModelState.IsValid)
             {
@@ -62,6 +63,9 @@ namespace EscalaWebMvc.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+
+            // Recarregar a lista de áreas em caso de erro
+            ViewBag.Areas = new SelectList(_context.Area, "Id", "Zona");
             return View(func);
         }
 
