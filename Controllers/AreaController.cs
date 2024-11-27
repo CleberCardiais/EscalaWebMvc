@@ -10,22 +10,22 @@ using EscalaWebMvc.Models;
 
 namespace EscalaWebMvc.Controllers
 {
-    public class FuncController : Controller
+    public class AreaController : Controller
     {
         private readonly EscalaWebMvcContext _context;
 
-        public FuncController(EscalaWebMvcContext context)
+        public AreaController(EscalaWebMvcContext context)
         {
             _context = context;
         }
 
-        // GET: Func
+        // GET: Area
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Func.ToListAsync());
+            return View(await _context.Area.ToListAsync());
         }
 
-        // GET: Func/Details/5
+        // GET: Area/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,47 +33,39 @@ namespace EscalaWebMvc.Controllers
                 return NotFound();
             }
 
-            var func = await _context.Func
+            var area = await _context.Area
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (func == null)
+            if (area == null)
             {
                 return NotFound();
             }
 
-            return View(func);
+            return View(area);
         }
 
-        // GET: Func/Create
+        // GET: Area/Create
         public IActionResult Create()
         {
-            ViewBag.Areas = new SelectList(_context.Area, "Id", "Zona");
             return View();
         }
 
-        // POST: Func/Create
+        // POST: Area/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,SetorId")] Func func)
+        public async Task<IActionResult> Create([Bind("Id,Zona")] Area area)
         {
             if (ModelState.IsValid)
             {
-
-                // Relacionar a área com o funcionário
-                func.Setor = await _context.Area.FindAsync(func.SetorId);
-
-                _context.Add(func);
+                _context.Add(area);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-
-            // Recarregar a lista de áreas em caso de erro
-            ViewBag.Areas = new SelectList(_context.Area, "Id", "Zona");
-            return View(func);
+            return View(area);
         }
 
-        // GET: Func/Edit/5
+        // GET: Area/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -81,22 +73,22 @@ namespace EscalaWebMvc.Controllers
                 return NotFound();
             }
 
-            var func = await _context.Func.FindAsync(id);
-            if (func == null)
+            var area = await _context.Area.FindAsync(id);
+            if (area == null)
             {
                 return NotFound();
             }
-            return View(func);
+            return View(area);
         }
 
-        // POST: Func/Edit/5
+        // POST: Area/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name")] Func func)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Zona")] Area area)
         {
-            if (id != func.Id)
+            if (id != area.Id)
             {
                 return NotFound();
             }
@@ -105,12 +97,12 @@ namespace EscalaWebMvc.Controllers
             {
                 try
                 {
-                    _context.Update(func);
+                    _context.Update(area);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!FuncExists(func.Id))
+                    if (!AreaExists(area.Id))
                     {
                         return NotFound();
                     }
@@ -121,10 +113,10 @@ namespace EscalaWebMvc.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(func);
+            return View(area);
         }
 
-        // GET: Func/Delete/5
+        // GET: Area/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -132,34 +124,34 @@ namespace EscalaWebMvc.Controllers
                 return NotFound();
             }
 
-            var func = await _context.Func
+            var area = await _context.Area
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (func == null)
+            if (area == null)
             {
                 return NotFound();
             }
 
-            return View(func);
+            return View(area);
         }
 
-        // POST: Func/Delete/5
+        // POST: Area/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var func = await _context.Func.FindAsync(id);
-            if (func != null)
+            var area = await _context.Area.FindAsync(id);
+            if (area != null)
             {
-                _context.Func.Remove(func);
+                _context.Area.Remove(area);
             }
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool FuncExists(int id)
+        private bool AreaExists(int id)
         {
-            return _context.Func.Any(e => e.Id == id);
+            return _context.Area.Any(e => e.Id == id);
         }
     }
 }
