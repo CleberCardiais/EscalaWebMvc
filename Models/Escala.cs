@@ -1,30 +1,29 @@
 ﻿using System;
-using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
-using System.Threading.Tasks;
 using EscalaWebMvc.Models.Enums;
-using System.ComponentModel.DataAnnotations;
+
 
 namespace EscalaWebMvc.Models
 {
     public class Escala
-
     {
-        [Key] //definir a chave primaria
-        public int Id { get; set; }
-        private List<Func> Funcionario { get; set; } = new List<Func>();
-        private List<Area> Area { get; set; } = new List<Area>();
+        public DateTime Data { get; set; }
 
-        //aqui ficará a lógica de montagem da escala
+        [NotMapped] // Ignora essa propriedade no mapeamento do EF Core
+        public Dictionary<Area, List<Func>> FuncionariosPorTurno { get; set; }
 
-        public Escala() 
+        public Escala() { }
+
+        public Escala(DateTime data, List<Func> funcionarios, List<Area> areas)
         {
+            Data = data;
+            FuncionariosPorTurno = new Dictionary<Area, List<Func>>();
         }
 
-        public Escala(int id)
-        {
-            Id = id;
-        }
     }
+
 }
+
+

@@ -1,0 +1,32 @@
+﻿@using System.Globalization
+@model EscalaWebMvc.Models.Enums.Calendario
+
+<div class="text-center">
+    <h2>Calendário - @Model.Mes/@Model.Ano</h2>
+    <a asp-action="Index" asp-route-ano="@(Model.Mes == 1 ? Model.Ano - 1 : Model.Ano)"
+       asp-route-mes="@(Model.Mes == 1 ? 12 : Model.Mes - 1)">⟵ Mês Anterior</a>
+    <a asp-action="Index" asp-route-ano="@(Model.Mes == 12 ? Model.Ano + 1 : Model.Ano)"
+       asp-route-mes="@(Model.Mes == 12 ? 1 : Model.Mes + 1)">Próximo Mês ⟶</a>
+
+    <table align="center">
+        <tr>
+            <th>Dom</th><th>Seg</th><th>Ter</th><th>Qua</th><th>Qui</th><th>Sex</th><th>Sáb</th>
+        </tr>
+        @foreach (var semana in Model.Dias.GroupBy(d => CultureInfo.CurrentCulture.Calendar.GetWeekOfYear(d, CalendarWeekRule.FirstDay, DayOfWeek.Sunday)))
+        {
+            <tr>
+                @foreach (var dia in semana)
+                {
+                    <td class="@((Model.IsFeriado(dia) ? "feriado" : Model.IsFinalDeSemana(dia) ? "finalSemana" : ""))">
+                        @dia.Day
+                    </td>
+                }
+            </tr>
+        }
+    </table>
+</div>
+
+<style>
+    .feriado { background-color: purple; color: white; }
+    .finalSemana { background-color: lightgray; }
+</style>

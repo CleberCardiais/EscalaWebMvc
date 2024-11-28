@@ -1,0 +1,20 @@
+﻿@model List<EscalaWebMvc.Models.Escala>
+
+<table>
+    <tr>
+        <th>Data</th>
+        <th>Setor</th>
+        <th>Funcionários</th>
+    </tr>
+    @foreach (var escala in Model)
+    {
+        <tr>
+            <td>@escala.Data.ToShortDateString()</td>
+            @foreach (var setor in escala.FuncionariosPorTurno)
+            {
+                <td>@setor.Key.Zona</td>
+                <td>@string.Join(", ", setor.Value.Select(f => f.Name))</td>
+            }
+        </tr>
+    }
+</table>
