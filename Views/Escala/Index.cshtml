@@ -1,20 +1,26 @@
 ﻿@model List<EscalaWebMvc.Models.Escala>
 
-<table>
-    <tr>
-        <th>Data</th>
-        <th>Setor</th>
-        <th>Funcionários</th>
-    </tr>
-    @foreach (var escala in Model)
-    {
-        <tr>
-            <td>@escala.Data.ToShortDateString()</td>
-            @foreach (var setor in escala.FuncionariosPorTurno)
-            {
-                <td>@setor.Key.Zona</td>
-                <td>@string.Join(", ", setor.Value.Select(f => f.Name))</td>
-            }
+<table class="table table-hover">
+    <thead>
+        <tr class="table-primary">
+            <th scope="col">Data</th>
+            <th scope="col">-</th>
+            <th scope="col">Recepcionistas</th>
+            <th scope="col">-</th>
+            <th scope="col">Equipe Limpeza</th>
+            <th scope="col">-</th>
+            <th scope="col">Professores (ordem por horário)</th>
         </tr>
-    }
+        @foreach (var escala in Model)
+        {
+            <tr class="table-secondary">
+                <td scope="row">@escala.Data.ToShortDateString()</td>
+                @foreach (var setor in escala.FuncionariosPorTurno)
+                {
+                    <td scope="row">@setor.Key.Zona</td>
+                    <td scope="rowgroup">@string.Join(", ", setor.Value.Select(f => f.Name))</td>
+                }
+            </tr>
+        }
+    </thead>
 </table>

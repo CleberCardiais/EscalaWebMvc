@@ -67,13 +67,13 @@ namespace EscalaWebMvc.Controllers
                         if (area.Zona == "Musculação")
                         {
                             // 3 manhã, 1 tarde
-                            turnoFuncionarios.AddRange(PegarProximosFuncionarios(rodizioPorSetor[area.Id], 3)); // Manhã
+                            turnoFuncionarios.AddRange(PegarProximosFuncionarios(rodizioPorSetor[area.Id], 2)); // Manhã
                             turnoFuncionarios.AddRange(PegarProximosFuncionarios(rodizioPorSetor[area.Id], 1)); // Tarde
                         }
                         else if (area.Zona == "Recepção")
                         {
-                            // 2 manhã, 1 tarde
-                            turnoFuncionarios.AddRange(PegarProximosFuncionarios(rodizioPorSetor[area.Id], 2)); // Manhã
+                            // 1 manhã, 1 tarde
+                            turnoFuncionarios.AddRange(PegarProximosFuncionarios(rodizioPorSetor[area.Id], 1)); // Manhã
                             turnoFuncionarios.AddRange(PegarProximosFuncionarios(rodizioPorSetor[area.Id], 1)); // Tarde
                         }
                         else if (area.Zona == "Limpeza")

@@ -34,6 +34,7 @@ namespace EscalaWebMvc.Controllers
             }
 
             var func = await _context.Func
+                .Include(f => f.Setor) // Inclui o setor associado
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (func == null)
             {

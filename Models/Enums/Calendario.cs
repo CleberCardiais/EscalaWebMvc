@@ -21,13 +21,25 @@ public class Calendario
 
     private void GerarDias()
     {
+        Dias.Clear();
+
         var primeiroDia = new DateTime(Ano, Mes, 1);
         var totalDias = DateTime.DaysInMonth(Ano, Mes);
+
+        // Adicionar células em branco para alinhar o primeiro dia
+        int diasEmBranco = (int)primeiroDia.DayOfWeek;
+        for (int i = 0; i < diasEmBranco; i++)
+        {
+            Dias.Add(DateTime.MinValue); // Representa um dia vazio
+        }
+
+        // Adicionar todos os dias do mês
         for (int i = 0; i < totalDias; i++)
         {
             Dias.Add(primeiroDia.AddDays(i));
         }
     }
+
 
     public bool IsFeriado(DateTime dia)
     {

@@ -35,24 +35,24 @@ namespace EscalaWebMvc.Controllers
         {
             return new List<DateTime>
     {
-        new DateTime(ano, 1, 1), // Ano Novo
+        //new DateTime(ano, 1, 1), // Ano Novo sem funcionamento
         new DateTime(ano, 1, 25), // Aniversário de São Paulo
         CalcularDataPascoa(ano).AddDays(-48), // Carnaval (segunda-feira)
         CalcularDataPascoa(ano).AddDays(-47), // Carnaval (terça-feira)
         CalcularDataPascoa(ano).AddDays(-2), // Sexta-feira Santa
         CalcularDataPascoa(ano), // Páscoa
         new DateTime(ano, 4, 21), // Tiradentes
-        new DateTime(ano, 5, 1), // Dia do Trabalho
-        new DateTime(ano, 6, 29), // São Pedro (Osasco)
+        //new DateTime(ano, 5, 1), // Dia do Trabalho sem funcionamento
+        //new DateTime(ano, 6, 29), // São Pedro (Osasco) confirmar feriado
         CalcularDataCorpusChristi(ano), // Corpus Christi
         new DateTime(ano, 7, 9), // Revolução Constitucionalista (SP)
         new DateTime(ano, 9, 7), // Independência do Brasil
         new DateTime(ano, 10, 12), // Nossa Senhora Aparecida
-        new DateTime(ano, 10, 28), // Dia do Funcionário Público
+        //new DateTime(ano, 10, 28), // Dia do Funcionário Público ponto facultativo
         new DateTime(ano, 11, 2), // Finados
         new DateTime(ano, 11, 15), // Proclamação da República
         new DateTime(ano, 11, 20), //Consciência Negra
-        new DateTime(ano, 12, 25) // Natal
+        //new DateTime(ano, 12, 25) // Natal sem funcionamento
     };
         }
 
